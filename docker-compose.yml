@@ -45,19 +45,19 @@ services:
     depends_on:
       - db
     volumes:
-      - static:/app/static
-      - media:/app/media
+      - static_volume:/backend_static
+      - media_volume:/media
 
   frontend:
     build: ./frontend/
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static
+      - static_volume:/frontend_static
 
   gateway:
     build: ./nginx/
     ports:
       - "9000:80"
     volumes:
-      - static:/static
-      - media:/media
+      - static_volume:/staticfiles
+      - media_volume:/media
