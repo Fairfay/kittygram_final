@@ -10,6 +10,6 @@ COPY . .
 
 ENV PYTHONUNBUFFERED=1
 
-CMD python manage.py collectstatic --noinput && \
+CMD python manage.py collectstatic --noinput --clear && \
     python manage.py migrate && \
-    gunicorn backend.wsgi:application --bind 0.0.0.0:9000
+    gunicorn kittygram_backend.wsgi:application --bind 0.0.0.0:9000
