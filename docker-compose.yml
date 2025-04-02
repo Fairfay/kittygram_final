@@ -13,10 +13,10 @@ services:
       - pg_data_kittygram:/var/lib/postgresql/data
 
   backend:
-    build: ./backend/
-    env_file: .env
     depends_on:
       - db
+    build: ./backend/
+    env_file: .env
     volumes:
       - static:/backend_static
       - media:/media
@@ -28,6 +28,9 @@ services:
       - static:/frontend_static
 
   gateway:
+    depends_on:
+      - backend
+      - frontend
     build: ./nginx/
     env_file: .env
     volumes:
